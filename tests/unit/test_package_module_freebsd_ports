@@ -31,7 +31,7 @@ testGetData()
 {
   input="File=zip
 Version=3.0-4
-Architecture=amd64"
+Architecture=none"
   expected="PackageType=repo
 Name=zip"
 
@@ -45,19 +45,19 @@ testListPackages()
 {
   expected="Name=autoconf
 Version=2.69
-Architecture=freebsd:10:x86:64
+Architecture=none
 Name=autoconf-wrapper
 Version=20131203
-Architecture=freebsd:10:x86:64
+Architecture=none
 Name=cfengine
 Version=3.7.0_1
-Architecture=freebsd:10:x86:64
+Architecture=none
 Name=gettext-tools
 Version=0.19.5.1
-Architecture=freebsd:10:x86:64
+Architecture=none
 Name=sudo
 Version=1.8.14p3
-Architecture=freebsd:10:x86:64"
+Architecture=none"
 
   actual=`echo | $FREEBSD_PORTS list-installed`
 
@@ -69,7 +69,7 @@ testInstallPackage()
 {
   input="Name=nano
 Version=2.4.2
-Architecture=amd64"
+Architecture=none"
   export ASSERT_MAKE_RUNS=install
   export ASSERT_CWD=/usr/ports/editors/nano
 
@@ -83,10 +83,10 @@ testListUpdates()
 {
   expected="Name=ca_root_nss
 Version=3.20
-Architecture=freebsd:10:x86:64
+Architecture=none
 Name=portmaster
 Version=3.17.8
-Architecture=freebsd:10:x86:64"
+Architecture=none"
   export ASSERT_PORTS_UPDATED=1
 
   actual=`echo | $FREEBSD_PORTS list-updates`
@@ -100,10 +100,10 @@ testListUpdatesLocal()
 {
   expected="Name=ca_root_nss
 Version=3.20
-Architecture=freebsd:10:x86:64
+Architecture=none
 Name=portmaster
 Version=3.17.8
-Architecture=freebsd:10:x86:64"
+Architecture=none"
 
   actual=`echo | $FREEBSD_PORTS list-updates-local`
 
@@ -128,7 +128,7 @@ testInstallWrongVersion()
 {
   input="Name=nano
 Version=2.4.3
-Architecture=amd64"
+Architecture=none"
   export ASSERT_CWD=/usr/ports/editors/nano
 
   actual=`echo "$input" | $FREEBSD_PORTS repo-install`
@@ -140,7 +140,7 @@ Architecture=amd64"
 testInstallAnyVersion()
 {
   input="Name=nano
-Architecture=amd64"
+Architecture=none"
   export ASSERT_MAKE_RUNS=install
   export ASSERT_CWD=/usr/ports/editors/nano
 
