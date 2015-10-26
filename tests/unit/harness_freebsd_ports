@@ -92,4 +92,4 @@ function pkg {
 
 trap finish_and_assert EXIT
 
-. $COMMAND
+. ../../modules/packages/freebsd_ports

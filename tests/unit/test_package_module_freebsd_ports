@@ -1,7 +1,5 @@
 #! /bin/sh
 
-export PATH=tests/stubs:$PATH
-export COMMAND=../../modules/packages/freebsd_ports
 FREEBSD_PORTS=./harness_freebsd_ports
 
 setUp()
@@ -70,8 +68,10 @@ testInstallPackage()
   input="Name=nano
 Version=2.4.2
 Architecture=none"
-  export ASSERT_MAKE_RUNS=install
-  export ASSERT_CWD=/usr/ports/editors/nano
+  ASSERT_MAKE_RUNS=install
+  export ASSERT_MAKE_RUNS
+  ASSERT_CWD=/usr/ports/editors/nano
+  export ASSERT_CWD
 
   actual=`echo "$input" | $FREEBSD_PORTS repo-install`
 
@@ -87,7 +87,8 @@ Architecture=none
 Name=portmaster
 Version=3.17.8
 Architecture=none"
-  export ASSERT_PORTS_UPDATED=1
+  ASSERT_PORTS_UPDATED=1
+  export ASSERT_PORTS_UPDATED
 
   actual=`echo | $FREEBSD_PORTS list-updates`
 
@@ -115,8 +116,10 @@ testUpdatePackage()
 {
   input="Name=ca_root_nss
 Version=3.20"
-  export ASSERT_MAKE_RUNS="deinstall reinstall"
-  export ASSERT_CWD=/usr/ports/security/ca_root_nss
+  ASSERT_MAKE_RUNS="deinstall reinstall"
+  export ASSERT_MAKE_RUNS
+  ASSERT_CWD=/usr/ports/security/ca_root_nss
+  export ASSERT_CWD
 
   actual=`echo "$input" | $FREEBSD_PORTS repo-install`
 
@@ -129,7 +132,8 @@ testInstallWrongVersion()
   input="Name=nano
 Version=2.4.3
 Architecture=none"
-  export ASSERT_CWD=/usr/ports/editors/nano
+  ASSERT_CWD=/usr/ports/editors/nano
+  export ASSERT_CWD
 
   actual=`echo "$input" | $FREEBSD_PORTS repo-install`
 
@@ -141,8 +145,10 @@ testInstallAnyVersion()
 {
   input="Name=nano
 Architecture=none"
-  export ASSERT_MAKE_RUNS=install
-  export ASSERT_CWD=/usr/ports/editors/nano
+  ASSERT_MAKE_RUNS=install
+  export ASSERT_MAKE_RUNS
+  ASSERT_CWD=/usr/ports/editors/nano
+  export ASSERT_CWD
 
   actual=`echo "$input" | $FREEBSD_PORTS repo-install`
 
@@ -153,8 +159,10 @@ Architecture=none"
 testRemove()
 {
   input="Name=nano"
-  export ASSERT_MAKE_RUNS=deinstall
-  export ASSERT_CWD=/usr/ports/editors/nano
+  ASSERT_MAKE_RUNS=deinstall
+  export ASSERT_MAKE_RUNS
+  ASSERT_CWD=/usr/ports/editors/nano
+  export ASSERT_CWD
 
   actual=`echo "$input" | $FREEBSD_PORTS remove`
 
