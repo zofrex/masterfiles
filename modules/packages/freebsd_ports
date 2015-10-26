@@ -27,7 +27,15 @@ case $command in
     version="${INPUT_Version}"
 
     export BATCH=1
-    cd `whereis -sq "$name"`
+    PORT_PATH="`whereis -sq \"$name\"`"
+
+    if [ -z "$PORT_PATH" ]
+    then
+      echo "ErrorMessage=Could not install $name, port does not exist"
+      exit 0
+    fi
+
+    cd "$PORT_PATH"
 
     if [ "$version" ]
     then

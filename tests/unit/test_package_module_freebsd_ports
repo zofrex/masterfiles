@@ -170,4 +170,14 @@ testRemove()
   assertEquals "" "$actual"
 }
 
+testTryInstallNonexistentPackage()
+{
+  input="Name=madeup"
+
+  actual=`echo "$input" | $FREEBSD_PORTS repo-install`
+
+  assertEquals "exit code" 0 $?
+  assertEquals "ErrorMessage=Could not install madeup, port does not exist" "$actual"
+}
+
 . `which shunit2`

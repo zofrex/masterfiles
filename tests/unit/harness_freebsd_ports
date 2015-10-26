@@ -8,6 +8,8 @@ function whereis {
   "-sq ca_root_nss")
     echo "/usr/ports/security/ca_root_nss"
   ;;
+  "-sq madeup")
+  ;;
   *)
     >&2 echo "ERROR: whereis incorrect args: $*"
     exit 1
