@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-function whereis {
+whereis() {
   case "$*" in
   "-sq nano")
     echo "/usr/ports/editors/nano"
@@ -17,11 +17,11 @@ function whereis {
   esac
 }
 
-function cd {
+cd() {
   CD_ARGS="$*"
 }
 
-function make {
+make() {
   if [ "$BATCH" != "1" ]
   then
     >&2 echo "ERROR: Make: BATCH != 1"
@@ -52,7 +52,7 @@ function make {
   MAKE_RAN="$*"
 }
 
-function portsnap {
+portsnap() {
   PORTSNAP_RAN=1
   echo "Portsnap output"
   expected="--interactive fetch update"
@@ -63,7 +63,7 @@ function portsnap {
   fi
 }
 
-function finish_and_assert {
+finish_and_assert() {
   if [ "$ASSERT_MAKE_RUNS" ]
   then
     if [ ! "$MAKE_RAN" ]
@@ -88,7 +88,7 @@ function finish_and_assert {
   fi
 }
 
-function pkg {
+pkg() {
   ./mock_pkg "$@"
 }
 
