@@ -7,7 +7,9 @@ while read -r line; do
 done
 
 list_updates() {
-  pkg version -v -l "<" | sed -Ee $'s/([^ ]+)-[^-]+ .* (.*)\\)/Name=\\1\\\nVersion=\\2\\\nArchitecture=none/'
+  pkg version -v -l "<" | sed -e 's/\([^ ]*\)-[^-]* .* \(.*\))/Name=\1\
+Version=\2\
+Architecture=none/'
 }
 
 case $command in
@@ -20,7 +22,7 @@ case $command in
     echo Name=$name
   ;;
   list-installed)
-    pkg info -f -a | grep -E '^(Name|Version|Architecture)' | sed -Ee 's/[ ]+:[ ]+/=/' -e 's/^Architecture=.*/Architecture=none/'
+    pkg info -f -a | egrep '^(Name|Version|Architecture)' | sed -e 's/[ ]*:[ ]*/=/' -e 's/^Architecture=.*/Architecture=none/'
   ;;
   repo-install)
     name="${INPUT_Name?Name must be given to repo-install}"
